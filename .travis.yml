@@ -4,4 +4,8 @@ service :
   - docker
 
 after_success :
+   - pip install --user awscli
    - docker build  -t william/node_test .
+   - eval $(aws ecr get-login --region eu-west-2 --no-include-email)
+   - docker tag william/nodetest 938788377650.dkr.ecr.eu-west-1.amazonaws.com/nodetest
+   - docker push 938788377650.dkr.ecr.eu-west-1.amazonaws.com/nodetest
