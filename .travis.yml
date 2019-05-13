@@ -1,1 +1,7 @@
 language : node_js
+
+service : 
+  - docker
+
+after_sucess :
+   - docker build  -t william/node_test .
