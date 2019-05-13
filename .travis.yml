@@ -3,5 +3,5 @@ language : node_js
 service : 
   - docker
 
-after_sucess :
+after_success :
    - docker build  -t william/node_test .
