@@ -3,7 +3,7 @@ language : node_js
 service : 
   - docker
 env : 
-  - DOCKER_IMAGE_NAME="938788377650.dkr.ecr.eu-west-1.amazonaws.com/nodetest:1.0-$TRAVIS_BUILD_NUMBER"
+  - DOCKER_IMAGE_NAME=938788377650.dkr.ecr.eu-west-1.amazonaws.com/nodetest:1.0-$TRAVIS_BUILD_NUMBER
 after_success :
    - pip install --user awscli
    - docker build  -t william/nodetest .
