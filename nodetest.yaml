@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: nodetest
+spec:
+  type: NodePort
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+    nodePort: 30080
+  selector:
+    run: nodetest
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nodetest
+  name: nodetest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: nodetest
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: nodetest
+    spec:
+      containers:
+      - image: $DOCKER_IMAGE_NAME
+        name: nodetest
+        ports:
+        - containerPort: 8081
+        resources: {}
+
+      imagePullSecrets:
+      - name: regcred
+status: {}

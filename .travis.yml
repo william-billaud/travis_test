@@ -1,8 +1,8 @@
 language : node_js
 
-service : 
+service :
   - docker
-env : 
+env :
   - DOCKER_IMAGE_NAME=938788377650.dkr.ecr.eu-west-1.amazonaws.com/nodetest:1.0-$TRAVIS_BUILD_NUMBER
 after_success :
    - pip install --user awscli
@@ -10,5 +10,8 @@ after_success :
    - eval $(aws ecr get-login --region eu-west-1 --no-include-email)
    - docker tag william/nodetest $DOCKER_IMAGE_NAME
    - docker push $DOCKER_IMAGE_NAME
-   - aws cloudformation deploy --template-file ./ecs-task.yaml --stack-name hellonode --region eu-west-1 --parameter-override ImageName=$DOCKER_IMAGE_NAME
-   - aws cloudformation update-stack --stack-name hellonode --template-body file://ecs-task.yaml --region eu-west-1 --parameters "ParameterKey=ImageName,ParameterValue=$DOCKER_IMAGE_NAME"
+#   - aws cloudformation deploy --template-file ./ecs-task.yaml --stack-name hellonode --region eu-west-1 --parameter-override ImageName=$DOCKER_IMAGE_NAME
+#   - aws cloudformation update-stack --stack-name hellonode --template-body file://ecs-task.yaml --region eu-west-1 --parameters "ParameterKey=ImageName,ParameterValue=$DOCKER_IMAGE_NAME"
+   - ./install_kubectl.sh
+   - cat nodetest.yaml | envsubst > kubernetes.yaml
+   - kubectl apply -f kubernetes.yaml --insecure-skip-tls-verify
