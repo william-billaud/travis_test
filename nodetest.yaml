@@ -41,6 +41,6 @@ spec:
         - containerPort: 8081
         resources: {}
         imagePullSecrets:
-        s- name: regcred
+        - name: regcred
 
 status: {}
