@@ -12,3 +12,4 @@ cp k3s.yaml ${HOME}/.kube/config
 kubectl config set clusters.default.server "$KUBE_SERVER"
 kubectl config set users.default.username "$KUBE_USERNAME"
 kubectl config set users.default.password "$KUBE_PASSWORD"
+kubectl config set clusters.default.certificate-authority-data "$KUBE_PASSWORD"

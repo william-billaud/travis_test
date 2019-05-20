@@ -14,4 +14,4 @@ after_success :
 #   - aws cloudformation update-stack --stack-name hellonode --template-body file://ecs-task.yaml --region eu-west-1 --parameters "ParameterKey=ImageName,ParameterValue=$DOCKER_IMAGE_NAME"
    - sh ./install_kubectl.sh
    - cat nodetest.yaml | envsubst > kubernetes.yaml
-   - kubectl apply -f kubernetes.yaml --insecure-skip-tls-verify
+   - kubectl apply -f kubernetes.yaml
